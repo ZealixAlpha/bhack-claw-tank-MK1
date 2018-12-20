@@ -26,12 +26,14 @@ void loop()
     {
       myservo.write(angle);
       delay(20); // waits 20ms between servo commands
+    }
   }
 if (valB == HIGH && valA == LOW) // check if the input A is OFF and input B is ON
   {
-    for(angle =>0; angle -= 1;)
+    for(angle >=0; angle -= 1;)
     {
       myservo.write(angle);
       delay(20); // waits 20ms between servo commands
+    }
   }
 }
