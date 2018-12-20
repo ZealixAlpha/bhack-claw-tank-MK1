@@ -1,38 +1,72 @@
 #include <Servo.h>
-  Servo myservo; // create servo object to control a servo
-  int angle = 0; // variable to store the servo position
+  Servo myservoAB; // create servo object to control a servo
+  int angleAB = 0; // variable to store the servo position
   const int inputPinA = 2; // attach push button to port 2
   const int inputPinB = 3; // attach push button to port 3
   
+  Servo myservoCD; // create servo object to control a servo
+  int angleCD = 0; // variable to store the servo position
+  const int inputPinC = 4; // attach push button to port 2
+  const int inputPinD = 5; // attach push button to port 3
+  
 void setup()
 {
-  myservo.attach(9); // attaches the servo on pin 9
+  myservoAB.attach(9); // attaches the servo on pin 9
   pinMode(inputPinA,INPUT); // set the push button as input
   digitalWrite(inputPinA,HIGH); // turn on internal pull-up on the inputPinA
   
   pinMode(inputPinB,INPUT); // set the push button as input
   digitalWrite(inputPinB,HIGH); // turn on internal pull-up on the inputPinB
+  
+  myservoCD.attach(10); // attaches the servo on pin 10
+  pinMode(inputPinC,INPUT); // set the push button as input
+  digitalWrite(inputPinC,HIGH); // turn on internal pull-up on the inputPinC
+  
+  pinMode(inputPinD,INPUT); // set the push button as input
+  digitalWrite(inputPinD,HIGH); // turn on internal pull-up on the inputPinD
 }
 
 
 void loop()
 {
+   //Up Down Controls for Server AB
   int valA = digitalRead(inputPinA); // read input value of push button A
-  int valB = digitalRead(inputPinA); // read input value of push button B
+  int valB = digitalRead(inputPinB); // read input value of push button B
   
   if (valA == HIGH && valB == LOW) // check if the input A is ON and input B is OFF
   {
-    for(angle <=180; angle += 1;)
+    for(angleAB <=180; angleAB += 1;)
     {
-      myservo.write(angle);
+      myservoAB.write(angleAB);
       delay(20); // waits 20ms between servo commands
     }
   }
 if (valB == HIGH && valA == LOW) // check if the input A is OFF and input B is ON
   {
-    for(angle >=0; angle -= 1;)
+    for(angleAB >=0; angleAB -= 1;)
     {
-      myservo.write(angle);
+      myservoAB.write(angleAB);
+      delay(20); // waits 20ms between servo commands
+    }
+  }
+  
+  //Up Down Controls for Server CD
+  int valC = digitalRead(inputPinC); // read input value of push button C
+  int valD = digitalRead(inputPinD); // read input value of push button D
+  
+  if (valC == HIGH && valD == LOW) // check if the input C is ON and input D is OFF
+  {
+    for(angleCD <=180; angleCD += 1;)
+    {
+      myservoCD.write(angleCD);
+      delay(20); // waits 20ms between servo commands
+    }
+  }
+if (valD == HIGH && valC == LOW) // check if the input C is OFF and input D is ON
+  {
+    for(angleCD >=0; angleCD -= 1;)
+    {
+      myservoCD.write(angleCD);
       delay(20); // waits 20ms between servo commands
     }
   }
