@@ -1,38 +1,37 @@
 #include <Servo.h>
   Servo myservo; // create servo object to control a servo
   int angle = 0; // variable to store the servo position
-  const int inputPin = 2; // attach push button to port 2
+  const int inputPinA = 2; // attach push button to port 2
+  const int inputPinB = 3; // attach push button to port 3
   
 void setup()
 {
   myservo.attach(9); // attaches the servo on pin 9
-  pinMode(inputPin,INPUT); // set the push button as input
-  digitalWrite(inputPin,HIGH); // turn on internal pull-up on the inputPin
+  pinMode(inputPinA,INPUT); // set the push button as input
+  digitalWrite(inputPinA,HIGH); // turn on internal pull-up on the inputPinA
+  
+  pinMode(inputPinB,INPUT); // set the push button as input
+  digitalWrite(inputPinB,HIGH); // turn on internal pull-up on the inputPinB
 }
 
 
 void loop()
 {
-  int val = digitalRead(inputPin); // read input value
-  if (val == HIGH) // check if the input is HIGH (
+  int valA = digitalRead(inputPinA); // read input value of push button A
+  int valB = digitalRead(inputPinA); // read input value of push button B
+  
+  if (valA == HIGH && valB == LOW) // check if the input A is ON and input B is OFF
   {
-    angle += 1
-  }
-    else
+    for(angle <=180; angle += 1;)
     {
-      digitalWrite(ledPin, LOW); // turn LED ON
-    }
-
-
-
-  for(angle = 0; angle < 180; angle += 1) // goes from 0 degrees to 180 degrees
-  { // in steps of 1 degree
-    myservo.write(angle); // tell servo to go to position in variable 'angle'
-    delay(20); // waits 20ms between servo commands
+      myservo.write(angle);
+      delay(20); // waits 20ms between servo commands
   }
-  for(angle = 180; angle >= 1; angle -= 1) // goes from 180 degrees to 0 degrees
+if (valB == HIGH && valA == LOW) // check if the input A is OFF and input B is ON
   {
-    myservo.write(pos); // tell servo to go to position in variable 'pos'
-    delay(20); // waits 20ms between servo commands
+    for(angle =>0; angle -= 1;)
+    {
+      myservo.write(angle);
+      delay(20); // waits 20ms between servo commands
   }
 }
